@@ -1,3 +1,6 @@
+// Author: Nick Nadolski
+// Date: 02/21/24
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,12 +9,15 @@ using TMPro;
 
 public class CoffeeTap : MonoBehaviour
 {
+    public GameObject pouring;
     public TMPro.TMP_Text scoreText;
     public int score;
     public int attemptsLeft;
     public int actual;
     public bool buttonPressed = false;
     public int guess;
+    private int actualMax = 10000;
+    private int actualMin = 1000;
 
     void Start()
     {
@@ -35,6 +41,8 @@ public class CoffeeTap : MonoBehaviour
             // Check if the button is held down
             if (Input.GetButton("Button"))
             {
+                // Update pouring visibility
+                pouring.GetComponent<Renderer>().enabled = true;
                 guess++;
             }
         }
@@ -79,13 +87,25 @@ public class CoffeeTap : MonoBehaviour
     void NewRound()
     {
         guess = 0;
-        actual = Random.Range(1000, 10000);
+        actual = Random.Range(actualMin, actualMax);
+
+        // Accessing the UpdateFillLine script attached to the FillLine object
+        UpdateFillLine fillLineScript = FindObjectOfType<UpdateFillLine>();
+        if (fillLineScript != null)
+        {
+            // Call the method in UpdateFillLine to update the Y position
+            fillLineScript.UpdateYPosition(actual, actualMax, actualMin);
+        }
+
+        // Ensure that the pouring object is initially hidden
+        pouring.GetComponent<Renderer>().enabled = false;
     }
 
     void EndGame()
     {
         scoreText.text = "Game Over. Final Score: " + score.ToString();
         Application.Quit();
+        EndGameEditor.EndGame(); // Used to quit the game editor in Unity
     }
 
     void UpdateScoreText()
