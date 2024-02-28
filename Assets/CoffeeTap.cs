@@ -16,8 +16,8 @@ public class CoffeeTap : MonoBehaviour
     public int actual;
     public bool buttonPressed = false;
     public int guess;
-    private int actualMax = 10000;
-    private int actualMin = 1000;
+    private int actualMax = 1000;
+    private int actualMin = 100;
 
     void Start()
     {

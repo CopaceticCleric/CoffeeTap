@@ -10,8 +10,8 @@ public class UpdateFillLine : MonoBehaviour
     // Method to update the Y position based on the new value of 'actual'
     public void UpdateYPosition(int actual, int actualMax, int actualMin)
     {
-        float maxY = -1.06f;
-        float minY = -2.84f;
+        float maxY = -36.73f;
+        float minY = -38.35f;
 
         // Calculate the new y position
         float ratio = (float)(actual - actualMin) / (float)(actualMax - actualMin);
