@@ -103,9 +103,13 @@ public class CoffeeTap : MonoBehaviour
 
     void EndGame()
     {
-        scoreText.text = "Game Over. Final Score: " + score.ToString();
-        Application.Quit();
-        EndGameEditor.EndGame(); // Used to quit the game editor in Unity
+        scoreText.text = "Game Over.\nFinal Score: " + score.ToString() + "\nPress Button to Restart.";
+        // EndGameEditor.EndGame(); // Used to quit the game editor in Unity
+        if (Input.GetButton("Button")) // Restart Game
+            {
+                buttonPressed = false;
+                Start();
+            }
     }
 
     void UpdateScoreText()

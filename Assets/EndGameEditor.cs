@@ -13,6 +13,8 @@ public class EndGameEditor : MonoBehaviour
 {
     public static void EndGame()
     {
+        #if UnityEditor
         UnityEditor.EditorApplication.isPlaying = false;
+        #endif
     }
 }
